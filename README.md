@@ -32,8 +32,7 @@
 
 <br>
 
-#### <b>Problem-04:</b> Given an integer array A with size N and an integer Q for queries, where 0< N,Q < 10^6.
-#### Write a program using prefix sum concept to find the sum of a given range L to R for each query. (1 <= L,R <= N and L <= R)
+#### <b>Problem-04:</b> Given an integer array A with size N and an integer Q for queries, where 0< N,Q < 10^6. Write a program using prefix sum concept to find the sum of a given range L to R for each query. (1 <= L,R <= N and L <= R)
     N
     A1 A2 A3…….AN
     Q
@@ -60,8 +59,7 @@
 
 <br>
 
-#### <b>Problem-05:</b> Given an integer array A with size N and an integer Q for queries, where (0 <  N < 10^5) , (-10^7 < Ai  < 10^7) and (0 < Q < 10^7) .
-#### Write a program using prefix sum concept to find the sum of positive integers from a given range L to R for each query. (1 <= L,R <= N)
+#### <b>Problem-05:</b> Given an integer array A with size N and an integer Q for queries, where (0 <  N < 10^5) , (-10^7 < Ai  < 10^7) and (0 < Q < 10^7). Write a program using prefix sum concept to find the sum of positive integers from a given range L to R for each query. (1 <= L,R <= N)
 
     N
     A1 A2 A3…….AN
