@@ -1,4 +1,4 @@
-/* Write a function named count_node() to count the number of nodes in that singly linked list.
+/* Write a function named delete_node_by_position() that deletes a node from the doubly linked list. If there is only one node left, it will delete the head.
  */
 
 #include <bits/stdc++.h>
@@ -8,15 +8,17 @@ class Node
 {
 public:
     int value;
+    Node *prev;
     Node *next;
     Node(int val)
     {
         value = val;
+        prev = NULL;
         next = NULL;
     }
 };
 
-int count_node(Node *&head)
+int length(Node *&head)
 {
     Node *node = head;
     int len = 0;
@@ -42,12 +44,31 @@ void display(Node *&head)
     cout << endl;
 }
 
+void displayReverse(Node *&head)
+{
+    if (head == NULL)
+        return;
+
+    Node *node = head;
+    while (node->next != NULL)
+    {
+        node = node->next;
+    }
+
+    while (node != NULL)
+    {
+        cout << node->value << " ";
+        node = node->prev;
+    }
+    cout << endl;
+}
+
 void insert_node_by_position(Node *&head, int pos, int val)
 {
-    if (pos < 0 || pos > count_node(head))
+    if (pos < 0 || pos > length(head))
         return;
-    Node *newNode = new Node(val);
 
+    Node *newNode = new Node(val);
     if (pos == 0)
     {
         newNode->next = head;
@@ -62,17 +83,22 @@ void insert_node_by_position(Node *&head, int pos, int val)
     }
 
     newNode->next = prevNode->next;
+    if (prevNode->next != NULL)
+        prevNode->next->prev = newNode;
+    newNode->prev = prevNode;
     prevNode->next = newNode;
 }
 
 void delete_node_by_position(Node *&head, int pos)
 {
-    if (pos < 0 || pos >= count_node(head))
+    if (pos < 0 || pos >= length(head))
         return;
 
     if (pos == 0)
     {
         Node *delNode = head;
+        if (delNode->next != NULL)
+            delNode->next->prev = NULL;
         head = delNode->next;
         delete delNode;
         return;
@@ -83,8 +109,11 @@ void delete_node_by_position(Node *&head, int pos)
     {
         prevNode = prevNode->next;
     }
+
     Node *delNode = prevNode->next;
     prevNode->next = delNode->next;
+    if (delNode->next != NULL)
+        delNode->next->prev = delNode->prev;
     delete delNode;
 }
 
@@ -94,14 +123,10 @@ int main()
     insert_node_by_position(head, 0, 1);
     insert_node_by_position(head, 1, 2);
     insert_node_by_position(head, 2, 3);
-    insert_node_by_position(head, 3, 4);
-    insert_node_by_position(head, 4, 5);
-    insert_node_by_position(head, 0, 6);
-    insert_node_by_position(head, 1, 7);
-    delete_node_by_position(head, 0);
 
+    delete_node_by_position(head, 3);
     display(head);
-    cout << "Total Node: " << count_node(head) << endl;
+    displayReverse(head);
 
     return 0;
 }

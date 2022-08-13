@@ -1,8 +1,4 @@
-/* Write a function named move_tail() which will move the tail to the first position of the list.
-For example: If the list looks like this,
-List: 2 -> 4 -> 1 -> 10 -> 5
-After the operation the list will look like this,
-List: 5 -> 2 -> 4 -> 1 -> 10
+/* Write a function named insert_node_by_position() that inserts a value at any position of the doubly linked list. You can assume that if there are 5 nodes in the list, the positions are 0, 1, 2, 3 and 4.
  */
 
 #include <bits/stdc++.h>
@@ -12,15 +8,17 @@ class Node
 {
 public:
     int value;
+    Node *prev;
     Node *next;
     Node(int val)
     {
         value = val;
+        prev = NULL;
         next = NULL;
     }
 };
 
-int count_node(Node *&head)
+int length(Node *&head)
 {
     Node *node = head;
     int len = 0;
@@ -46,12 +44,31 @@ void display(Node *&head)
     cout << endl;
 }
 
+void displayReverse(Node *&head)
+{
+    if (head == NULL)
+        return;
+
+    Node *node = head;
+    while (node->next != NULL)
+    {
+        node = node->next;
+    }
+
+    while (node != NULL)
+    {
+        cout << node->value << " ";
+        node = node->prev;
+    }
+    cout << endl;
+}
+
 void insert_node_by_position(Node *&head, int pos, int val)
 {
-    if (pos < 0 || pos > count_node(head))
+    if (pos < 0 || pos > length(head))
         return;
-    Node *newNode = new Node(val);
 
+    Node *newNode = new Node(val);
     if (pos == 0)
     {
         newNode->next = head;
@@ -66,24 +83,10 @@ void insert_node_by_position(Node *&head, int pos, int val)
     }
 
     newNode->next = prevNode->next;
+    if (prevNode->next != NULL)
+        prevNode->next->prev = newNode;
+    newNode->prev = prevNode;
     prevNode->next = newNode;
-}
-
-void move_tail(Node *&head)
-{
-    if (head == NULL || head->next == NULL)
-        return;
-
-    Node *prevNode = head;
-    while (prevNode->next->next != NULL)
-    {
-        prevNode = prevNode->next;
-    }
-
-    Node *lastNode = prevNode->next;
-    prevNode->next = NULL;
-    lastNode->next = head;
-    head = lastNode;
 }
 
 int main()
@@ -93,10 +96,8 @@ int main()
     insert_node_by_position(head, 1, 2);
     insert_node_by_position(head, 2, 3);
     insert_node_by_position(head, 3, 4);
-
-    move_tail(head);
     display(head);
-    cout << "Total Node: " << count_node(head) << endl;
+    displayReverse(head);
 
     return 0;
 }
