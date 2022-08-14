@@ -83,7 +83,7 @@
     11
     3
 
-<b>Solution:</b> [Click here to see the solution.](https://github.com/faysalahammedchowdhury01/array-and-linked-list-practice-problems/blob/main/05.cpp) (Unsolved)
+<b>Solution:</b> [Click here to see the solution.](https://github.com/faysalahammedchowdhury01/array-and-linked-list-practice-problems/blob/main/05.cpp)
 
 
 <br>
