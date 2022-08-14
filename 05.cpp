@@ -30,6 +30,50 @@ using namespace std;
 
 int main()
 {
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+
+    int positiveArr[n];
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] < 0)
+        {
+            positiveArr[i] = 0;
+        }
+        else
+        {
+            positiveArr[i] = arr[i];
+        }
+    }
+
+    int prefixSum[n];
+    prefixSum[0] = positiveArr[0];
+    for (int i = 1; i < n; i++)
+    {
+        prefixSum[i] = prefixSum[i - 1] + positiveArr[i];
+    }
+
+    int q;
+    cin >> q;
+    for (int i = 0; i < q; i++)
+    {
+        int left, right;
+        cin >> left >> right;
+        left--, right--;
+        if (left == 0)
+        {
+            cout << "ANS: " << prefixSum[right] << endl;
+        }
+        else
+        {
+            cout << "ANS: " << prefixSum[right] - prefixSum[left - 1] << endl;
+        }
+    }
 
     return 0;
 }
